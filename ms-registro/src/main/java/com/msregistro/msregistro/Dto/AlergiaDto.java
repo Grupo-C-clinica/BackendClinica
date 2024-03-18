@@ -1,31 +1,16 @@
-package com.msregistro.msregistro.Entity;
+package com.msregistro.msregistro.Dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "ALERGIA")
-public class Alergia {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_ALERGIA")
+public class AlergiaDto {
     private Integer idAlergia;
-
-    @Column(name = "ID_PACIENTE")
     private Integer idPaciente;
-
-    @Column(name = "TIPO_ALERGIA")
     private String tipoAlergia;
-
-    @Column(name = "CAUSA")
     private String causa;
-
-    @Column(name = "STATUS")
     private Boolean status;
 
-    public Alergia() {
+    public AlergiaDto() {
     }
 
-    public Alergia(Integer idAlergia, Integer idPaciente, String tipoAlergia, String causa, Boolean status) {
+    public AlergiaDto(Integer idAlergia, Integer idPaciente, String tipoAlergia, String causa, Boolean status) {
         this.idAlergia = idAlergia;
         this.idPaciente = idPaciente;
         this.tipoAlergia = tipoAlergia;
@@ -75,7 +60,7 @@ public class Alergia {
 
     @Override
     public String toString() {
-        return "Alergia{" +
+        return "AlergiaDto{" +
                 "idAlergia=" + idAlergia +
                 ", idPaciente=" + idPaciente +
                 ", tipoAlergia='" + tipoAlergia + '\'' +
