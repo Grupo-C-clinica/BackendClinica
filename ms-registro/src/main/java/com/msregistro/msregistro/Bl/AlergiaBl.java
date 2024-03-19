@@ -24,4 +24,17 @@ public class AlergiaBl {
         }
         return alergiasDto;
     }
+
+    //Agregar alergia a un paciente
+    public void addAlergiaByPaciente(List<AlergiaDto> alergias,Integer idPaciente) {
+        Alergia alergia = new Alergia();
+        for (AlergiaDto alergiaDto : alergias) {
+            alergia.setIdPaciente(idPaciente);
+            alergia.setTipoAlergia(alergiaDto.getTipoAlergia());
+            alergia.setCausa(alergiaDto.getCausa());
+            alergia.setStatus(true);
+            alergiaRepository.save(alergia);
+        }
+    }
+
 }

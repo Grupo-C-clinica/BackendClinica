@@ -31,4 +31,16 @@ public class AlergiaApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al buscar alergias"));
         }
     }
+
+    //Agregar alergias a un paciente
+    @PostMapping(path = "/{idPaciente}")
+    public ResponseEntity<ResponseDto<String>> addAlergiaByPaciente(@RequestBody List<AlergiaDto> alergias, @PathVariable Integer idPaciente) {
+        try {
+            alergiaBl.addAlergiaByPaciente(alergias, idPaciente);
+            return ResponseEntity.ok(new ResponseDto<>(200, null, "Alergias agregadas"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al agregar alergias"));
+        }
+    }
 }
