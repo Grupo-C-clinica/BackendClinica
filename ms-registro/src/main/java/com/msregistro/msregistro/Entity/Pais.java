@@ -5,17 +5,17 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "pais")
+@Table(name = "PAIS")
 public class Pais implements Serializable {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column(name = "id_pais")
+    @Column(name = "ID_PAIS")
     private Integer idPais;
 
-    @Column(name = "nombre")
+    @Column(name = "NOMBRE")
     private String nombre;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private Boolean status;
 
     public Pais() {

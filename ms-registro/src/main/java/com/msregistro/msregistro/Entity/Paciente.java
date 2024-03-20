@@ -3,26 +3,26 @@ package com.msregistro.msregistro.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "paciente")
+@Table(name = "PACIENTE")
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_paciente")
+    @Column(name = "ID_PACIENTE")
     private Integer idPaciente;
 
-    @Column(name = "id_zona")
+    @Column(name = "ID_ZONA")
     private Integer idZona;
 
-    @Column(name = "id_persona")
+    @Column(name = "ID_PERSONA")
     private Integer idPersona;
 
-    @Column(name = "correo")
+    @Column(name = "CORREO")
     private String correo;
 
-    @Column(name = "tipo_sangre")
+    @Column(name = "TIPO_SANGRE")
     private String tipoSangre;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private Boolean status;
 
     public Paciente() {

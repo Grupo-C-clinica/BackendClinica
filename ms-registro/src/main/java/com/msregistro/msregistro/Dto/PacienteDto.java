@@ -10,8 +10,8 @@ public class PacienteDto {
     private String apellidoM;
     private Date fechaNacimiento;
     private String genero;
-    private String Telefono;
-    private String CI;
+    private String telefono;
+    private String ci;
     private String correo;
     private String tipoSangre;
     private Boolean status;
@@ -19,7 +19,7 @@ public class PacienteDto {
     public PacienteDto() {
     }
 
-    public PacienteDto(Integer idPaciente, Integer idZona, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero, String Telefono, String CI, String correo, String tipoSangre, Boolean status) {
+    public PacienteDto(Integer idPaciente, Integer idZona, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero, String telefono, String ci, String correo, String tipoSangre, Boolean status) {
         this.idPaciente = idPaciente;
         this.idZona = idZona;
         this.nombre = nombre;
@@ -27,8 +27,8 @@ public class PacienteDto {
         this.apellidoM = apellidoM;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
-        this.Telefono = Telefono;
-        this.CI = CI;
+        this.telefono = telefono;
+        this.ci = ci;
         this.correo = correo;
         this.tipoSangre = tipoSangre;
         this.status = status;
@@ -91,19 +91,19 @@ public class PacienteDto {
     }
 
     public String getTelefono() {
-        return Telefono;
+        return telefono;
     }
 
     public void setTelefono(String telefono) {
-        Telefono = telefono;
+        this.telefono = telefono;
     }
 
-    public String getCI() {
-        return CI;
+    public String getCi() {
+        return ci;
     }
 
-    public void setCI(String CI) {
-        this.CI = CI;
+    public void setCi(String ci) {
+        this.ci = ci;
     }
 
     public String getCorreo() {
@@ -140,8 +140,8 @@ public class PacienteDto {
                 ", apellidoM='" + apellidoM + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
                 ", genero='" + genero + '\'' +
-                ", Telefono='" + Telefono + '\'' +
-                ", CI='" + CI + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", ci='" + ci + '\'' +
                 ", correo='" + correo + '\'' +
                 ", tipoSangre='" + tipoSangre + '\'' +
                 ", status=" + status +

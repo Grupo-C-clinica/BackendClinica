@@ -3,45 +3,45 @@ package com.msregistro.msregistro.Entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "persona")
+@Table(name = "PERSONA")
 public class Persona implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Column (name = "id_persona")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "ID_PERSONA")
     private Integer idPersona;
 
-    @Column(name = "nombre")
+    @Column(name = "NOMBRE")
     private String nombre;
 
-    @Column(name = "apellido_p")
+    @Column(name = "APELLIDO_P")
     private String apellidoP;
 
-    @Column(name = "apellido_m")
+    @Column(name = "APELLIDO_M")
     private String apellidoM;
 
-    @Column(name = "fecha_nacimiento")
-    private String fechaNacimiento;
+    @Column(name = "FECHA_NACIMIENTO")
+    private Date fechaNacimiento;
 
-    @Column(name = "genero")
+    @Column(name = "GENERO")
     private String genero;
 
-    @Column(name = "telefono")
+    @Column(name = "TELEFONO")
     private String telefono;
 
-    @Column(name = "ci")
+    @Column(name = "CI")
     private String ci;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private Boolean status;
 
     public Persona() {
     }
 
-    public Persona(Integer idPersona, String nombre, String apellidoP, String apellidoM, String fechaNacimiento, String genero, String telefono, String ci, Boolean status) {
+    public Persona(Integer idPersona, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero, String telefono, String ci, Boolean status) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -85,11 +85,11 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -132,7 +132,7 @@ public class Persona implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", apellidoP='" + apellidoP + '\'' +
                 ", apellidoM='" + apellidoM + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
                 ", genero='" + genero + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", ci='" + ci + '\'' +

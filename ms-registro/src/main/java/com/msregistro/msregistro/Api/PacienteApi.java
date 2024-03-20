@@ -15,7 +15,7 @@ public class PacienteApi {
     private PacienteBl pacienteBl;
 
     @PostMapping(path = "/agregar")
-    public ResponseEntity<ResponseDto<String>> addPaciente(@RequestBody PacienteDto nuevoPaciente) throws Exception {
+    public ResponseEntity<ResponseDto<String>> addPaciente(@RequestBody PacienteDto nuevoPaciente)  {
         try{
             pacienteBl.addPaciente(nuevoPaciente);
             return ResponseEntity.ok(new ResponseDto<>(200, null, "Paciente agregado"));

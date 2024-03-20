@@ -5,20 +5,20 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "zona")
+@Table(name = "ZONA")
 public class Zona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_zona")
+    @Column(name = "ID_ZONA")
     private Integer idZona;
 
-    @Column(name = "id_ciudad")
+    @Column(name = "ID_CIUDAD")
     private Integer idCiudad;
 
-    @Column(name = "nombre")
+    @Column(name = "NOMBRE")
     private String nombre;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private Boolean status;
 
     public Zona() {

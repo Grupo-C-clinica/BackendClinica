@@ -16,19 +16,23 @@ import java.util.Date;
 @Service
 public class PacienteBl {
     @Autowired
-
     private PacienteRepository pacienteRepository;
+
+    @Autowired
     private PersonaRepository personaRepository;
 
     //Agregar paciente
-    public void addPaciente(PacienteDto nuevoPaciente) throws Exception {
+    public void addPaciente(PacienteDto nuevoPaciente)  {
+        System.out.println("Paciente: " + nuevoPaciente);
         try {
             Persona persona = new Persona();
             persona.setNombre(nuevoPaciente.getNombre());
             persona.setApellidoP(nuevoPaciente.getApellidoP());
             persona.setApellidoM(nuevoPaciente.getApellidoM());
-            persona.setFechaNacimiento(String.valueOf(new Date()));
+            persona.setFechaNacimiento(nuevoPaciente.getFechaNacimiento());
             persona.setGenero(nuevoPaciente.getGenero());
+            persona.setTelefono(nuevoPaciente.getTelefono());
+            persona.setCi(nuevoPaciente.getCi());
             persona.setStatus(true);
             personaRepository.save(persona);
             Paciente paciente = new Paciente();
@@ -39,7 +43,7 @@ public class PacienteBl {
             paciente.setStatus(true);
             pacienteRepository.save(paciente);
         } catch (Exception e) {
-            throw new Exception("Error al agregar paciente");
+            e.printStackTrace();
         }
     }
 }
