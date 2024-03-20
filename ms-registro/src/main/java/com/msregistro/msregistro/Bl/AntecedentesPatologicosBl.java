@@ -27,12 +27,20 @@ public class AntecedentesPatologicosBl {
 
     //Agregar antecedentes patologicos a un paciente
     public void addAntecedentesPatologicosByPaciente(List<AntecedentesPatologicosDto> antecedentesPatologicos,Integer idPaciente) {
-        AntecedentesPatologicos antecedentePatologico = new AntecedentesPatologicos();
         for (AntecedentesPatologicosDto antecedentePatologicoDto : antecedentesPatologicos) {
+            AntecedentesPatologicos antecedentePatologico = new AntecedentesPatologicos();
             antecedentePatologico.setIdPaciente(idPaciente);
             antecedentePatologico.setAntecedente(antecedentePatologicoDto.getAntecedente());
             antecedentePatologico.setStatus(true);
             antecedentesPatologicosRepository.save(antecedentePatologico);
         }
+    }
+
+    //Eliminar antecedente patologico de un paciente
+    public void deleteAntecedentesPatologicosByPaciente(Integer antecedentesPatologicosId) {
+        AntecedentesPatologicos antecedentePatologico = new AntecedentesPatologicos();
+        antecedentePatologico.setAntecedentesPatologicosId(antecedentesPatologicosId);
+        antecedentePatologico.setStatus(false);
+        antecedentesPatologicosRepository.save(antecedentePatologico);
     }
 }

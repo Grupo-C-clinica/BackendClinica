@@ -27,14 +27,22 @@ public class AlergiaBl {
 
     //Agregar alergia a un paciente
     public void addAlergiaByPaciente(List<AlergiaDto> alergias,Integer idPaciente) {
-        Alergia alergia = new Alergia();
         for (AlergiaDto alergiaDto : alergias) {
+            Alergia alergia = new Alergia();
             alergia.setIdPaciente(idPaciente);
             alergia.setTipoAlergia(alergiaDto.getTipoAlergia());
             alergia.setCausa(alergiaDto.getCausa());
             alergia.setStatus(true);
             alergiaRepository.save(alergia);
         }
+    }
+
+    //Eliminar alergia de un paciente
+    public void deleteAlergiaByPaciente(Integer idAlergia) {
+        Alergia alergia = new Alergia();
+        alergia.setIdAlergia(idAlergia);
+        alergia.setStatus(false);
+        alergiaRepository.save(alergia);
     }
 
 }
