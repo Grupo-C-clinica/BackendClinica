@@ -36,7 +36,7 @@ public class PacienteBl {
             persona.setStatus(true);
             personaRepository.save(persona);
             Paciente paciente = new Paciente();
-            paciente.setIdPersona(persona.getIdPersona());
+            paciente.setIdPersona(persona);
             paciente.setIdZona(nuevoPaciente.getIdZona());
             paciente.setCorreo(nuevoPaciente.getCorreo());
             paciente.setTipoSangre(nuevoPaciente.getTipoSangre());

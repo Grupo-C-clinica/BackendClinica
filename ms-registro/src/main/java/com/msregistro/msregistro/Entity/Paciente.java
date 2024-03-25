@@ -13,8 +13,9 @@ public class Paciente {
     @Column(name = "ID_ZONA")
     private Integer idZona;
 
-    @Column(name = "ID_PERSONA")
-    private Integer idPersona;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PERSONA", nullable = false)
+    private Persona persona;
 
     @Column(name = "CORREO")
     private String correo;
@@ -28,10 +29,10 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(Integer idPaciente, Integer idZona, Integer idPersona, String correo, String tipoSangre, Boolean status) {
+    public Paciente(Integer idPaciente, Integer idZona, Persona idPersona, String correo, String tipoSangre, Boolean status) {
         this.idPaciente = idPaciente;
         this.idZona = idZona;
-        this.idPersona = idPersona;
+        this.persona = persona;
         this.correo = correo;
         this.tipoSangre = tipoSangre;
         this.status = status;
@@ -53,12 +54,12 @@ public class Paciente {
         this.idZona = idZona;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public Persona getIdPersona() {
+        return persona;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setIdPersona(Persona idPersona) {
+        this.persona = persona;
     }
 
     public String getCorreo() {
@@ -90,7 +91,7 @@ public class Paciente {
         return "Paciente{" +
                 "idPaciente=" + idPaciente +
                 ", idZona=" + idZona +
-                ", idPersona=" + idPersona +
+                ", persona=" + persona +
                 ", correo='" + correo + '\'' +
                 ", tipoSangre='" + tipoSangre + '\'' +
                 ", status=" + status +
