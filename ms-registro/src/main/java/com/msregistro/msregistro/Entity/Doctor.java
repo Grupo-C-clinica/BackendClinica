@@ -1,6 +1,6 @@
 package com.msregistro.msregistro.Entity;
 
-import javax.persistence.*;
+/*import javax.persistence.*;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -83,4 +83,4 @@ public class Doctor {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-}
+}*/
