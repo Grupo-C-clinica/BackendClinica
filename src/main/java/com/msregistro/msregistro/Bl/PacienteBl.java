@@ -12,19 +12,19 @@ import com.msregistro.msregistro.Dao.PersonaRepository;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
-
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PacienteBl {
     @Autowired
     private PacienteRepository pacienteRepository;
-
     @Autowired
     private PersonaRepository personaRepository;
 
     //Agregar paciente
-    public void addPaciente(PacienteDto nuevoPaciente)  {
-        System.out.println("Paciente: " + nuevoPaciente);
+    @Transactional
+    public void addPaciente(PacienteDto nuevoPaciente) {
         try {
+            // Crear y guardar la entidad Persona
             Persona persona = new Persona();
             persona.setNombre(nuevoPaciente.getNombre());
             persona.setApellidoP(nuevoPaciente.getApellidoP());
@@ -33,17 +33,20 @@ public class PacienteBl {
             persona.setGenero(nuevoPaciente.getGenero());
             persona.setTelefono(nuevoPaciente.getTelefono());
             persona.setCi(nuevoPaciente.getCi());
-            persona.setStatus(true);
-            personaRepository.save(persona);
+            persona.setStatus(nuevoPaciente.getStatus());
+            persona = personaRepository.save(persona);
+
+            // Crear y guardar la entidad Paciente asociada con la Persona guardada
             Paciente paciente = new Paciente();
-            paciente.setIdPersona(persona);
+            paciente.setIdPersona(persona); // Asociar Persona
             paciente.setIdZona(nuevoPaciente.getIdZona());
             paciente.setCorreo(nuevoPaciente.getCorreo());
             paciente.setTipoSangre(nuevoPaciente.getTipoSangre());
-            paciente.setStatus(true);
+            paciente.setStatus(nuevoPaciente.getStatus());
             pacienteRepository.save(paciente);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Error al agregar paciente", e);
         }
     }
 }

@@ -58,9 +58,10 @@ public class Paciente {
         return persona;
     }
 
-    public void setIdPersona(Persona idPersona) {
-        this.persona = persona;
+    public void setIdPersona(Persona persona) {
+        this.persona = persona; // Corregido para usar el parámetro 'persona' correctamente
     }
+
 
     public String getCorreo() {
         return correo;
