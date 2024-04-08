@@ -3,6 +3,7 @@ package com.msregistro.msregistro.Api;
 import com.msregistro.msregistro.Bl.PacienteBl;
 import com.msregistro.msregistro.Bl.PersonaBl;
 import com.msregistro.msregistro.Dto.PacienteDto;
+import com.msregistro.msregistro.Dto.PacienteViewDto;
 import com.msregistro.msregistro.Dto.PersonaDto;
 import com.msregistro.msregistro.Dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,22 @@ public class PacienteApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
         }
     }
+
+    //Mostrar pacientes por nombre
+    @GetMapping(path = "/nombre/{nombre}")
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByName(@PathVariable String nombre) {
+        List<PacienteViewDto> pacientes = pacienteBl.findPacientesByName(nombre);
+        try {
+            if (pacientes != null) {
+                return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
+            } else {
+                return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+        }
+    }
+
+    
 }
