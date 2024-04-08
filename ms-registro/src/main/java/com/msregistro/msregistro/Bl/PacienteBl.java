@@ -56,5 +56,9 @@ public class PacienteBl {
         return pacientes;
     }
 
-    
+    // Obtener lista de pacientes por fecha de nacimiento
+    public List<PacienteViewDto> findPacientes(Date fechaNacimiento) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByFechaNacimientoAndStatusTrue(fechaNacimiento);
+        return pacientes;
+    }
 }
