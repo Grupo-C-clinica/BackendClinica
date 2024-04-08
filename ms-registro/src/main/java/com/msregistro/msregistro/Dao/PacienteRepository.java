@@ -21,6 +21,12 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
             "WHERE persona.nombre LIKE %:nombre% AND p.status = true")
     List<PacienteViewDto> findPacienteViewDtosByNombreAndStatusTrue(@Param("nombre") String nombre);
 
+    // Mostrar pacientes status true, buscar por fecha de nacimiento
+    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
+            "FROM Paciente p JOIN p.persona persona " +
+            "WHERE persona.fechaNacimiento = :fechaNacimiento AND p.status = true")
+    List<PacienteViewDto> findPacienteViewDtosByFechaNacimientoAndStatusTrue(@Param("fechaNacimiento") String fechaNacimiento);
+
     
 
 
