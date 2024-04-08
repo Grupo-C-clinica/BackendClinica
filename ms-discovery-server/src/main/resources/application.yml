@@ -1,0 +1,12 @@
+server:
+  port: 8815
+
+spring:
+  application:
+    name: ms-discovery-server
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8815/eureka/
