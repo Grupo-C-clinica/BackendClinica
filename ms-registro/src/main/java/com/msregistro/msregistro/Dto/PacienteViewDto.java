@@ -1,23 +1,25 @@
 package com.msregistro.msregistro.Dto;
 
+import java.util.Date;
+
 public class PacienteViewDto {
     private Integer idPaciente;
     private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private String fechaNacimiento;
-    private String sexo;
+    private String apellidoP;
+    private String apellidoM;
+    private Date fechaNacimiento;
+    private String genero;
 
     public PacienteViewDto() {
     }
 
-    public PacienteViewDto(Integer idPaciente, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String sexo) {
+    public PacienteViewDto(Integer idPaciente, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
         this.fechaNacimiento = fechaNacimiento;
-        this.sexo = sexo;
+        this.genero = genero;
     }
 
     public Integer getIdPaciente() {
@@ -36,36 +38,36 @@ public class PacienteViewDto {
         this.nombre = nombre;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
+    public String getApellidoP() {
+        return apellidoP;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setApellidoP(String apellidoP) {
+        this.apellidoP = apellidoP;
     }
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
+    public String getApellidoM() {
+        return apellidoM;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setApellidoM(String apellidoM) {
+        this.apellidoM = apellidoM;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     @Override
@@ -73,10 +75,10 @@ public class PacienteViewDto {
         return "PacienteViewDto{" +
                 "idPaciente=" + idPaciente +
                 ", nombre='" + nombre + '\'' +
-                ", apellidoPaterno='" + apellidoPaterno + '\'' +
-                ", apellidoMaterno='" + apellidoMaterno + '\'' +
+                ", apellidoP='" + apellidoP + '\'' +
+                ", apellidoM='" + apellidoM + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                ", sexo='" + sexo + '\'' +
+                ", genero='" + genero + '\'' +
                 '}';
     }
 }
