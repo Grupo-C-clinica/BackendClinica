@@ -65,5 +65,23 @@ public class PacienteApi {
         }
     }
 
+    //Mostrar pacientes por fecha de nacimiento
+    @GetMapping(path = "/fecha/{fechaNacimiento}")
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByFecha(@PathVariable String fechaNacimiento) {
+        List<PacienteViewDto> pacientes = pacienteBl.findPacientesByFecha(fechaNacimiento);
+        try {
+            if (pacientes != null) {
+                return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
+            } else {
+                return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+        }
+    }
+
     
+
+
 }
