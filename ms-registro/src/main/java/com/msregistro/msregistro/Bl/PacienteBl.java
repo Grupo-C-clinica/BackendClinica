@@ -51,14 +51,20 @@ public class PacienteBl {
     }
 
     //Obtener lista de pacientes por nombre
-    public List<PacienteViewDto> findPacientes(String nombre) {
+    public List<PacienteViewDto> findPacientesByName(String nombre) {
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByNombreAndStatusTrue(nombre);
         return pacientes;
     }
 
     // Obtener lista de pacientes por fecha de nacimiento
-    public List<PacienteViewDto> findPacientes(Date fechaNacimiento) {
+    public List<PacienteViewDto> findPacientesByFecha(String fechaNacimiento) {
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByFechaNacimientoAndStatusTrue(fechaNacimiento);
+        return pacientes;
+    }
+
+    //Obtener lista de pacientes por estado
+    public List<PacienteViewDto> findPacientesByStatus(Boolean status) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByStatus(status);
         return pacientes;
     }
 }
