@@ -1,6 +1,7 @@
 package com.msregistro.msregistro.Bl;
 
 import com.msregistro.msregistro.Dto.PacienteDto;
+import com.msregistro.msregistro.Dto.PacienteViewDto;
 import com.msregistro.msregistro.Dto.PersonaDto;
 import com.msregistro.msregistro.Entity.Paciente;
 import com.msregistro.msregistro.Entity.Persona;
@@ -12,6 +13,7 @@ import com.msregistro.msregistro.Dao.PersonaRepository;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PacienteBl {
@@ -47,4 +49,12 @@ public class PacienteBl {
             e.printStackTrace();
         }
     }
+
+    //Obtener lista de pacientes por nombre
+    public List<PacienteViewDto> findPacientes(String nombre) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByNombreAndStatusTrue(nombre);
+        return pacientes;
+    }
+
+    
 }
