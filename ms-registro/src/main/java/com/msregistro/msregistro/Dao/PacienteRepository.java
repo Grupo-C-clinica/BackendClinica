@@ -27,7 +27,11 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
             "WHERE persona.fechaNacimiento = :fechaNacimiento AND p.status = true")
     List<PacienteViewDto> findPacienteViewDtosByFechaNacimientoAndStatusTrue(@Param("fechaNacimiento") String fechaNacimiento);
 
-    
+    // Mostrar pacientes por estado
+    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
+            "FROM Paciente p JOIN p.persona persona " +
+            "WHERE p.status = :status")
+    List<PacienteViewDto> findPacienteViewDtosByStatus(@Param("status") Boolean status);
 
 
 }
