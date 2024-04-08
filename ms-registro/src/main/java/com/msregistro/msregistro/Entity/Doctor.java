@@ -1,6 +1,7 @@
 package com.msregistro.msregistro.Entity;
 
-/*import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -83,4 +84,16 @@ public class Doctor {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-}*/
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "idDoctor=" + idDoctor +
+                ", idPersona=" + idPersona +
+                ", username='" + username + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                '}';
+    }
+}
