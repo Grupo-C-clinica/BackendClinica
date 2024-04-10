@@ -1,6 +1,7 @@
 package com.msregistro.msregistro.Bl;
 
 import com.msregistro.msregistro.Dto.PacienteDto;
+import com.msregistro.msregistro.Dto.PacienteViewDto;
 import com.msregistro.msregistro.Dto.PersonaDto;
 import com.msregistro.msregistro.Entity.Paciente;
 import com.msregistro.msregistro.Entity.Persona;
@@ -12,6 +13,7 @@ import com.msregistro.msregistro.Dao.PersonaRepository;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PacienteBl {
@@ -37,7 +39,7 @@ public class PacienteBl {
             personaRepository.save(persona);
 
             Paciente paciente = new Paciente();
-            paciente.setIdPersona(persona);
+            paciente.setPersona(persona);
             paciente.setIdZona(nuevoPaciente.getIdZona());
             paciente.setCorreo(nuevoPaciente.getCorreo());
             paciente.setTipoSangre(nuevoPaciente.getTipoSangre());
@@ -46,5 +48,23 @@ public class PacienteBl {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //Obtener lista de pacientes por nombre
+    public List<PacienteViewDto> findPacientesByName(String nombre) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByNombreAndStatusTrue(nombre);
+        return pacientes;
+    }
+
+    // Obtener lista de pacientes por fecha de nacimiento
+    public List<PacienteViewDto> findPacientesByFecha(String fechaNacimiento) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByFechaNacimientoAndStatusTrue(fechaNacimiento);
+        return pacientes;
+    }
+
+    //Obtener lista de pacientes por estado
+    public List<PacienteViewDto> findPacientesByStatus(Boolean status) {
+        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByStatus(status);
+        return pacientes;
     }
 }

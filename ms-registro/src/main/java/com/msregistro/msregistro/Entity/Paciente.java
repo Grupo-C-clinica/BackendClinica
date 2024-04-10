@@ -29,7 +29,7 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(Integer idPaciente, Integer idZona, Persona idPersona, String correo, String tipoSangre, Boolean status) {
+    public Paciente(Integer idPaciente, Integer idZona, Persona persona, String correo, String tipoSangre, Boolean status) {
         this.idPaciente = idPaciente;
         this.idZona = idZona;
         this.persona = persona;
@@ -54,11 +54,11 @@ public class Paciente {
         this.idZona = idZona;
     }
 
-    public Persona getIdPersona() {
+    public Persona getPersona() {
         return persona;
     }
 
-    public void setIdPersona(Persona idPersona) {
+    public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
