@@ -1,0 +1,5 @@
+package com.mshistorial.mshistorial.Entity;
+
+public class Historial {
+
+}
