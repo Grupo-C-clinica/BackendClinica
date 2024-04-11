@@ -53,6 +53,7 @@ public class PacienteBl {
     //Obtener lista de pacientes por nombre
     public List<PacienteViewDto> findPacientesByName(String nombre) {
         System.out.println("Nombre: " + nombre);
+        nombre = nombre.toLowerCase();
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByNombreAndStatusTrue(nombre);
         return pacientes;
     }

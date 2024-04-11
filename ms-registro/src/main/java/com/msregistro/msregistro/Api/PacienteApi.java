@@ -53,19 +53,13 @@ public class PacienteApi {
     }
 
     //Mostrar pacientes por nombre
-    @GetMapping(path = "/nombre/{nombre}")
+    @GetMapping(path = "/nombre")
     public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByName(@RequestParam String nombre) {
         List<PacienteViewDto> pacientes = pacienteBl.findPacientesByName(nombre);
-        try {
-            if (!pacientes.isEmpty()) {
-                return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
-            } else {
-                return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+        if (pacientes == null) {
+            pacientes = new ArrayList<>();  // Asegura devolver una lista vacía en lugar de null
         }
+        return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
     }
 
 
