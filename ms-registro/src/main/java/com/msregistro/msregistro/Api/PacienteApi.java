@@ -81,6 +81,21 @@ public class PacienteApi {
         }
     }
 
+    @GetMapping(path = "/estado/{estado}")
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByStatus(@PathVariable Boolean estado) {
+        try {
+            List<PacienteViewDto> pacientes = pacienteBl.findPacientesByStatus(estado);
+            if (pacientes != null && !pacientes.isEmpty()) {
+                return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
+            } else {
+                return ResponseEntity.ok(new ResponseDto<>(200, new ArrayList<>(), "No se encontraron pacientes"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+        }
+    }
+
     
 
 
