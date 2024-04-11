@@ -52,19 +52,48 @@ public class PacienteBl {
 
     //Obtener lista de pacientes por nombre
     public List<PacienteViewDto> findPacientesByName(String nombre) {
+        System.out.println("Nombre: " + nombre);
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByNombreAndStatusTrue(nombre);
         return pacientes;
     }
 
     // Obtener lista de pacientes por fecha de nacimiento
-    public List<PacienteViewDto> findPacientesByFecha(String fechaNacimiento) {
+    public List<PacienteViewDto> findPacientesByFecha(Date fechaNacimiento) {
+        System.out.println("Fecha de nacimiento: " + fechaNacimiento);
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByFechaNacimientoAndStatusTrue(fechaNacimiento);
         return pacientes;
     }
 
     //Obtener lista de pacientes por estado
     public List<PacienteViewDto> findPacientesByStatus(Boolean status) {
+        System.out.println("Estado: " + status);
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByStatus(status);
         return pacientes;
+    }
+
+    //Modificar un paciente
+    public void updatePaciente(PacienteDto pacienteDto, Integer idPaciente) {
+        System.out.println("Paciente: " + pacienteDto);
+        try {
+            Paciente paciente = new Paciente();
+            paciente.setIdPaciente(idPaciente);
+            Persona persona = new Persona();
+            persona.setIdPersona(paciente.getPersona().getIdPersona());
+            persona.setNombre(pacienteDto.getNombre());
+            persona.setApellidoP(pacienteDto.getApellidoP());
+            persona.setApellidoM(pacienteDto.getApellidoM());
+            persona.setFechaNacimiento(pacienteDto.getFechaNacimiento());
+            persona.setGenero(pacienteDto.getGenero());
+            persona.setTelefono(pacienteDto.getTelefono());
+            persona.setCi(pacienteDto.getCi());
+            personaRepository.save(persona);
+
+            paciente.setIdZona(pacienteDto.getIdZona());
+            paciente.setCorreo(pacienteDto.getCorreo());
+            paciente.setTipoSangre(pacienteDto.getTipoSangre());
+            pacienteRepository.save(paciente);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
