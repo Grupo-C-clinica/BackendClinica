@@ -53,7 +53,7 @@ public class PacienteApi {
     }
 
     //Mostrar pacientes por nombre
-    @GetMapping
+    @GetMapping(path = "/nombre/{nombre}")
     public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByName(@RequestParam String nombre) {
         List<PacienteViewDto> pacientes = pacienteBl.findPacientesByName(nombre);
         try {
@@ -71,7 +71,7 @@ public class PacienteApi {
 
     //Mostrar pacientes por fecha de nacimiento
     @GetMapping(path = "/fecha/{fechaNacimiento}")
-    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByFecha(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date fechaNacimiento) {
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByFecha(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaNacimiento) {
         List<PacienteViewDto> pacientes = pacienteBl.findPacientesByFecha(fechaNacimiento);
         try {
             if (pacientes != null) {
@@ -84,6 +84,7 @@ public class PacienteApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
         }
     }
+
 
 
 
