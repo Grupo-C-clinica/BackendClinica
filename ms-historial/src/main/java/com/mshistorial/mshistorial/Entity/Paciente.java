@@ -6,7 +6,10 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "PACIENTE")
-public class Paciente {
+public class Paciente implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PACIENTE")
