@@ -1,6 +1,6 @@
 spring:
   application:
-      name: ClinicaOtorrino
+      name: ms-registro
   datasource:
     url: jdbc:postgresql://localhost:5432/ClinicaOtorrino
     username: postgres
