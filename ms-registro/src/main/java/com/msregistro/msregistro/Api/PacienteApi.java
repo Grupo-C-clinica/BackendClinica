@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -50,11 +51,11 @@ public class PacienteApi {
     }
 
     //Mostrar pacientes por nombre
-    @GetMapping(path = "/nombre/{nombre}")
-    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByName(@PathVariable String nombre) {
+    @GetMapping
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByName(@RequestParam String nombre) {
         List<PacienteViewDto> pacientes = pacienteBl.findPacientesByName(nombre);
         try {
-            if (pacientes != null) {
+            if (!pacientes.isEmpty()) {
                 return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
             } else {
                 return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
@@ -64,6 +65,7 @@ public class PacienteApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
         }
     }
+
 
     //Mostrar pacientes por fecha de nacimiento
     @GetMapping(path = "/fecha/{fechaNacimiento}")
