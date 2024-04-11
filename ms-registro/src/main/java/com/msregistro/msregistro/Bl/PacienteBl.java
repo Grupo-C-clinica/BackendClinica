@@ -58,7 +58,7 @@ public class PacienteBl {
     }
 
     // Obtener lista de pacientes por fecha de nacimiento
-    public List<PacienteViewDto> findPacientesByFecha(String fechaNacimiento) {
+    public List<PacienteViewDto> findPacientesByFecha(Date fechaNacimiento) {
         System.out.println("Fecha de nacimiento: " + fechaNacimiento);
         List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByFechaNacimientoAndStatusTrue(fechaNacimiento);
         return pacientes;

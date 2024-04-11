@@ -7,10 +7,12 @@ import com.msregistro.msregistro.Dto.PacienteViewDto;
 import com.msregistro.msregistro.Dto.PersonaDto;
 import com.msregistro.msregistro.Dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -69,7 +71,7 @@ public class PacienteApi {
 
     //Mostrar pacientes por fecha de nacimiento
     @GetMapping(path = "/fecha/{fechaNacimiento}")
-    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByFecha(@PathVariable String fechaNacimiento) {
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByFecha(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date fechaNacimiento) {
         List<PacienteViewDto> pacientes = pacienteBl.findPacientesByFecha(fechaNacimiento);
         try {
             if (pacientes != null) {
@@ -82,6 +84,8 @@ public class PacienteApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
         }
     }
+
+
 
     @GetMapping(path = "/estado/{estado}")
     public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByStatus(@PathVariable Boolean estado) {

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
@@ -26,7 +27,9 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
     @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
             "FROM Paciente p JOIN p.persona persona " +
             "WHERE persona.fechaNacimiento = :fechaNacimiento AND p.status = true")
-    List<PacienteViewDto> findPacienteViewDtosByFechaNacimientoAndStatusTrue(@Param("fechaNacimiento") String fechaNacimiento);
+    List<PacienteViewDto> findPacienteViewDtosByFechaNacimientoAndStatusTrue(@Param("fechaNacimiento") Date fechaNacimiento);
+
+
 
     // Mostrar pacientes por estado
     @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
