@@ -75,10 +75,10 @@ public class PacienteBl {
     public void updatePaciente(PacienteDto pacienteDto, Integer idPaciente) {
         System.out.println("Paciente: " + pacienteDto);
         try {
-            Paciente paciente = new Paciente();
-            paciente.setIdPaciente(idPaciente);
-            Persona persona = new Persona();
-            persona.setIdPersona(paciente.getPersona().getIdPersona());
+            Paciente paciente = pacienteRepository.findById(idPaciente)
+                    .orElseThrow(() -> new RuntimeException("Paciente not found"));
+            Persona persona = paciente.getPersona();
+
             persona.setNombre(pacienteDto.getNombre());
             persona.setApellidoP(pacienteDto.getApellidoP());
             persona.setApellidoM(pacienteDto.getApellidoM());
@@ -86,11 +86,14 @@ public class PacienteBl {
             persona.setGenero(pacienteDto.getGenero());
             persona.setTelefono(pacienteDto.getTelefono());
             persona.setCi(pacienteDto.getCi());
+            persona.setStatus(true); // Aquí puedes establecer el status
+
             personaRepository.save(persona);
 
             paciente.setIdZona(pacienteDto.getIdZona());
             paciente.setCorreo(pacienteDto.getCorreo());
             paciente.setTipoSangre(pacienteDto.getTipoSangre());
+
             pacienteRepository.save(paciente);
         } catch (Exception e) {
             e.printStackTrace();
