@@ -20,9 +20,9 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
     @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente, p.persona.nombre, p.persona.apellidoP, p.persona.apellidoM, p.persona.fechaNacimiento, p.persona.genero) " +
             "FROM Paciente p WHERE (LOWER(p.persona.nombre) LIKE LOWER(:nombre) OR " +
             "LOWER(p.persona.apellidoP) LIKE LOWER(:nombre) OR " +
-            "LOWER(p.persona.apellidoM) LIKE LOWER(:nombre)) AND p.status = true")
+            "LOWER(p.persona.apellidoM) LIKE LOWER(:nombre))")
     List<PacienteViewDto> findPacienteViewDtosByNombreAndStatusTrue(@Param("nombre") String nombre);
-
+//AND p.status = true
 
 
 
