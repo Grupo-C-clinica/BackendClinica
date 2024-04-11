@@ -41,4 +41,8 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
     List<PacienteViewDto> findPacienteViewDtosByStatus(@Param("status") Boolean status);
 
 
+    // obtener id de persona por id paciente
+    @Query("SELECT p.persona.idPersona FROM Paciente p WHERE p.idPaciente = ?1")
+    Integer findIdPersonaByIdPaciente( Integer idPaciente);
+
 }
