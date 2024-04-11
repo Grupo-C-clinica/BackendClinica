@@ -31,7 +31,7 @@ public class HistorialBl {
         return historialesDto;
     }
 
-    //CREAR HISTORIAL NUEVO
+    //CREAR HISTORIAL NUEVO POR PACIENTE
 
-    //public void addHistorialByPaciente
+    //public void addHistorialByPaciente (Integer idPaciente){}
 }

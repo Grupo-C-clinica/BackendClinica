@@ -18,7 +18,7 @@ public class HistorialApi {
     private HistorialBl hsitorialBl;
 
     //Mostrar historiales de un paciente
-    @GetMapping(path = "{/idPaciente}")
+    @GetMapping(path = "/{idPaciente}")
     public ResponseEntity<ResponseDto<List<HistorialDto>>> findHistorialByPaciente(@PathVariable Integer idPaciente){
         List<HistorialDto> historiales = hsitorialBl.listaHistorialByPaciente(idPaciente);
         try{
