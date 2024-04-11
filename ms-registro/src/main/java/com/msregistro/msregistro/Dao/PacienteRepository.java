@@ -17,10 +17,13 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
     */
 
     // Mostrar pacientes status true, buscar por nombre
-    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
-            "FROM Paciente p JOIN p.persona persona " +
-            "WHERE LOWER(persona.nombre) LIKE %:nombre% AND p.status = true")
+    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente, p.persona.nombre, p.persona.apellidoP, p.persona.apellidoM, p.persona.fechaNacimiento, p.persona.genero) " +
+            "FROM Paciente p WHERE (LOWER(p.persona.nombre) LIKE LOWER(:nombre) OR " +
+            "LOWER(p.persona.apellidoP) LIKE LOWER(:nombre) OR " +
+            "LOWER(p.persona.apellidoM) LIKE LOWER(:nombre))")
     List<PacienteViewDto> findPacienteViewDtosByNombreAndStatusTrue(@Param("nombre") String nombre);
+//AND p.status = true
+
 
 
     // Mostrar pacientes status true, buscar por fecha de nacimiento
@@ -37,5 +40,9 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
             "WHERE p.status = :status")
     List<PacienteViewDto> findPacienteViewDtosByStatus(@Param("status") Boolean status);
 
+
+    // obtener id de persona por id paciente
+    @Query("SELECT p.persona.idPersona FROM Paciente p WHERE p.idPaciente = ?1")
+    Integer findIdPersonaByIdPaciente( Integer idPaciente);
 
 }
