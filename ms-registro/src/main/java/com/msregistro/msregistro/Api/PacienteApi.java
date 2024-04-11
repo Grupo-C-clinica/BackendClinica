@@ -98,6 +98,18 @@ public class PacienteApi {
         }
     }
 
+    //modificar un paciente
+    @PutMapping(path = "/{idPaciente}")
+    public ResponseEntity<ResponseDto<String>> updatePaciente(@RequestBody PacienteDto pacienteDto, @PathVariable Integer idPaciente) {
+        try {
+            pacienteBl.updatePaciente(pacienteDto, idPaciente);
+            return ResponseEntity.ok(new ResponseDto<>(200, null, "Paciente modificado"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al modificar paciente"));
+        }
+    }
+
 
 
     
