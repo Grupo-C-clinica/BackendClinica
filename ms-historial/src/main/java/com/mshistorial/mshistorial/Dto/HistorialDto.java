@@ -14,7 +14,7 @@ public class HistorialDto {
     public HistorialDto() {
     }
 
-    public HistorialDto(Integer idHistorial, Paciente idPaciente, Date fecha, String observaciones, Boolean status) {
+    public HistorialDto(Integer idHistorial, Integer idPaciente, Date fecha, String observaciones, Boolean status) {
         this.idHistorial = idHistorial;
         this.idPaciente = idPaciente;
         this.fecha = fecha;

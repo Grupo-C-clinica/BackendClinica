@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Table(name = "PACIENTE")
 public class Paciente implements Serializable{
 
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,11 +59,11 @@ public class Paciente implements Serializable{
         this.idZona = idZona;
     }
 
-    public Persona getIdPersona() {
+    public Persona getPersona() {
         return persona;
     }
 
-    public void setIdPersona(Persona idPersona) {
+    public void setPersona(Persona persona) {
         this.persona = persona;
     }
 

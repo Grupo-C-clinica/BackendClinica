@@ -26,12 +26,12 @@ public class HistorialBl {
         List<Historial> historiales = historialRepository.obtenerHistorialPorIdPaciente(idPaciente);
         List<HistorialDto> historialesDto = new ArrayList<>();
         for(Historial historial: historiales){
-            historialesDto.add(new HistorialDto(historial.getIdHistorial(), historial.getPaciente(), historial.getFecha(), historial.getObservaciones(), historial.getStatus()));
+            historialesDto.add(new HistorialDto(historial.getIdHistorial(), historial.getPaciente().getIdPaciente(), historial.getFecha(), historial.getObservaciones(), historial.getStatus()));
         }
         return historialesDto;
     }
 
-    //CREAR HISTORIAL NUEVO
+    //CREAR HISTORIAL NUEVO POR PACIENTE
 
-    //public void addHistorialByPaciente
+    //public void addHistorialByPaciente (Integer idPaciente){}
 }
