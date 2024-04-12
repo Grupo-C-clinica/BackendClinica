@@ -8,7 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
 
     /*Mostrar datos iniciales en lista de pacientes
@@ -35,11 +36,10 @@ public interface PacienteRepository extends JpaRepository<Paciente,Integer> {
 
 
     // Mostrar pacientes por estado
-    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente,p.persona.nombre,p.persona.apellidoP,p.persona.apellidoM,p.persona.fechaNacimiento,p.persona.genero) " +
+    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(p.idPaciente, p.persona.nombre, p.persona.apellidoP, p.persona.apellidoM, p.persona.fechaNacimiento, p.persona.genero) " +
             "FROM Paciente p JOIN p.persona persona " +
             "WHERE p.status = :status")
-    List<PacienteViewDto> findPacienteViewDtosByStatus(@Param("status") Boolean status);
-
+    Page<PacienteViewDto> findPacienteViewDtosByStatus(@Param("status") Boolean status, Pageable pageable);
 
     // obtener id de persona por id paciente
     @Query("SELECT p.persona.idPersona FROM Paciente p WHERE p.idPaciente = ?1")

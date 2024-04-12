@@ -14,7 +14,8 @@ import com.msregistro.msregistro.Dao.PersonaRepository;
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 @Service
 public class PacienteBl {
     @Autowired
@@ -66,10 +67,9 @@ public class PacienteBl {
     }
 
     //Obtener lista de pacientes por estado
-    public List<PacienteViewDto> findPacientesByStatus(Boolean status) {
+    public Page<PacienteViewDto> findPacientesByStatus(Boolean status, Pageable pageable) {
         System.out.println("Estado: " + status);
-        List<PacienteViewDto> pacientes = pacienteRepository.findPacienteViewDtosByStatus(status);
-        return pacientes;
+        return pacienteRepository.findPacienteViewDtosByStatus(status, pageable);
     }
 
     //Modificar un paciente

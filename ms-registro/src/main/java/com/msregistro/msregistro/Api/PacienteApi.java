@@ -14,7 +14,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/v1/paciente")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -37,11 +49,13 @@ public class PacienteApi {
     }
 
     //Mostrar datos de persona de pacientes
+
     @GetMapping(path = "/all")
-    public ResponseEntity<ResponseDto<List<PersonaDto>>> findPacientes() {
-        List<PersonaDto> pacientes = personaBl.findPeronasPacientes();
-        try {
-            if (pacientes != null) {
+    public ResponseEntity<ResponseDto<Page<PersonaDto>>> findPacientes(
+            @PageableDefault(page = 0, size = 10) Pageable pageable)
+    {try {
+            Page<PersonaDto> pacientes = personaBl.findPeronasPacientes(pageable);
+            if (!pacientes.isEmpty()) {
                 return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
             } else {
                 return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
@@ -83,13 +97,13 @@ public class PacienteApi {
 
 
     @GetMapping(path = "/estado/{estado}")
-    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesByStatus(@PathVariable Boolean estado) {
+    public ResponseEntity<ResponseDto<Page<PacienteViewDto>>> findPacientesByStatus(@PathVariable Boolean estado, @PageableDefault(size = 10) Pageable pageable) {
         try {
-            List<PacienteViewDto> pacientes = pacienteBl.findPacientesByStatus(estado);
+            Page<PacienteViewDto> pacientes = pacienteBl.findPacientesByStatus(estado, pageable);
             if (pacientes != null && !pacientes.isEmpty()) {
                 return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
             } else {
-                return ResponseEntity.ok(new ResponseDto<>(200, new ArrayList<>(), "No se encontraron pacientes"));
+                return ResponseEntity.ok(new ResponseDto<>(200, Page.empty(), "No se encontraron pacientes"));
             }
         } catch (Exception e) {
             e.printStackTrace();

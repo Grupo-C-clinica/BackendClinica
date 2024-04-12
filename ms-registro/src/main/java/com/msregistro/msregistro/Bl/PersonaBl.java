@@ -8,20 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 @Service
 public class PersonaBl {
     @Autowired
     private PersonaRepository personaRepository;
 
-    //Mostrar lista de personas que son pacientes
-    public List<PersonaDto> findPeronasPacientes(){
-        List<Persona> personas = personaRepository.findAllPacientes();
-        List<PersonaDto> personasDto =  new ArrayList<>();
-        for (Persona persona : personas) {
-            personasDto.add(new PersonaDto(persona.getIdPersona(), persona.getNombre(), persona.getApellidoP(),persona.getApellidoM(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(), persona.getCi(), persona.getStatus()));
-        }
-        return personasDto;
+    public Page<PersonaDto> findPeronasPacientes(Pageable pageable){
+        Page<Persona> pagePersonas = personaRepository.findAllPacientes(pageable);
+        return pagePersonas.map(persona -> new PersonaDto(persona.getIdPersona(), persona.getNombre(), persona.getApellidoP(),persona.getApellidoM(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(), persona.getCi(), persona.getStatus()));
     }
 
 }

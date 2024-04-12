@@ -10,10 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
-
-    //Mostrar todas las personas que son pacientes
     @Query(value = "SELECT * FROM PERSONA p WHERE p.ID_PERSONA IN (SELECT ID_PERSONA FROM PACIENTE)", nativeQuery = true)
-    List<Persona> findAllPacientes();
+    Page<Persona> findAllPacientes(Pageable pageable);
 }
