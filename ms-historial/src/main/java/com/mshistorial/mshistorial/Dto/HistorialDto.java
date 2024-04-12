@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class HistorialDto {
     private Integer idHistorial;
-    private Paciente idPaciente;
+    private Integer idPaciente;
     private Date fecha;
     private String observaciones;
     private Boolean status;
@@ -14,7 +14,7 @@ public class HistorialDto {
     public HistorialDto() {
     }
 
-    public HistorialDto(Integer idHistorial, Paciente idPaciente, Date fecha, String observaciones, Boolean status) {
+    public HistorialDto(Integer idHistorial, Integer idPaciente, Date fecha, String observaciones, Boolean status) {
         this.idHistorial = idHistorial;
         this.idPaciente = idPaciente;
         this.fecha = fecha;
@@ -30,11 +30,11 @@ public class HistorialDto {
         this.idHistorial = idHistorial;
     }
 
-    public Paciente getIdPaciente() {
+    public Integer getIdPaciente() {
         return idPaciente;
     }
 
-    public void setIdPaciente(Paciente idPaciente) {
+    public void setIdPaciente(Integer idPaciente) {
         this.idPaciente = idPaciente;
     }
 

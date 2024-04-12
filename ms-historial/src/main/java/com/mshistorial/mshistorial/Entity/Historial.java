@@ -8,7 +8,6 @@ import java.util.Date;
 @Entity
 @Table(name= "HISTORIAL_CLINICO")
 public class Historial implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class Historial implements Serializable {
     @Column(name = "OBSERVACIONES")
     private String observaciones;
 
-    @Column(name = "STATUA")
+    @Column(name = "STATUS")
     private Boolean status;
 
     public Historial() {

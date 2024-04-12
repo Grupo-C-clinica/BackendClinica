@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface HistorialRepository extends JpaRepository<Historial, Integer> {
     //Obtener historiales dependiendo del paciente
-    @Query(value = "SELECT * FROM historial WHERE idPaciente =?1" , nativeQuery = true)
+    @Query("SELECT h FROM Historial h WHERE h.paciente.idPaciente =?1" )
     public List<Historial> obtenerHistorialPorIdPaciente(Integer idPaciente);
+
+
 }
