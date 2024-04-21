@@ -33,5 +33,15 @@ public class HistorialBl {
 
     //CREAR HISTORIAL NUEVO POR PACIENTE
 
-    //public void addHistorialByPaciente (Integer idPaciente){}
+    public void addHistorialByPaciente(HistorialDto historialDto, Integer idPaciente){
+        Paciente paciente = new Paciente();
+        paciente.setIdPaciente(idPaciente);
+        Historial historial = new Historial();
+        historial.setPaciente(paciente);
+        historial.setFecha(historialDto.getFecha());
+        historial.setObservaciones(historialDto.getObservaciones());
+        historial.setStatus(historialDto.getStatus());
+
+        historialRepository.save(historial);
+    }
 }
