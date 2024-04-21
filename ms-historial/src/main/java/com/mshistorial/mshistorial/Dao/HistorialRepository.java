@@ -11,5 +11,6 @@ public interface HistorialRepository extends JpaRepository<Historial, Integer> {
     @Query("SELECT h FROM Historial h WHERE h.paciente.idPaciente =?1" )
     public List<Historial> obtenerHistorialPorIdPaciente(Integer idPaciente);
 
-
+    @Query("SELECT h FROM  Historial h WHERE h.idHistorial =?1")
+    public Historial obtenerHistorialById(Integer idHistorial);
 }

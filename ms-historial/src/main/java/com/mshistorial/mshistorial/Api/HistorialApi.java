@@ -44,4 +44,18 @@ public class HistorialApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al crear el historial"));
         }
     }
+
+    // Obtener historial mediante su ID
+    @GetMapping("/{idHistorial}")
+    public ResponseEntity<ResponseDto<HistorialDto>> obtenerHistorialById (@PathVariable Integer idHistorial){
+        try {
+            HistorialDto historialDto = hsitorialBl.obtnerHistorialById(idHistorial);
+            return ResponseEntity.ok(new ResponseDto<>(200, historialDto, "Historial encontrado"));
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.ok(new ResponseDto<>(404, null, e.getMessage()));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al obtener el historial"));
+        }
+    }
 }

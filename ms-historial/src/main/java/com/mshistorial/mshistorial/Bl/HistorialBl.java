@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HistorialBl {
@@ -44,4 +45,20 @@ public class HistorialBl {
 
         historialRepository.save(historial);
     }
+
+    // MOSTRAR CADA HISTORIAL DEPENDIENDO DE LA ID
+    public HistorialDto obtnerHistorialById(Integer idHistorial){
+        Historial historial = historialRepository.obtenerHistorialById(idHistorial);
+        if (historial == null){
+            throw new IllegalArgumentException("El historial con ID "+ idHistorial + "no existe");
+        }
+        return new HistorialDto(
+                historial.getIdHistorial(),
+                historial.getPaciente().getIdPaciente(),
+                historial.getFecha(),
+                historial.getObservaciones(),
+                historial.getStatus()
+        );
+    }
 }
+
