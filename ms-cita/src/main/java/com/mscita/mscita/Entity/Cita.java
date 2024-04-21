@@ -2,6 +2,8 @@ package com.mscita.mscita.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "CITA")
 public class Cita {
@@ -28,7 +30,7 @@ public class Cita {
     private String hora;
 
     @Column(name = "FECHA", nullable = false)
-    private String fecha;
+    private Date fecha;
     @Column(name = "RAZON", nullable = false)
     private String razon;
 
@@ -38,7 +40,7 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Integer idPaciente, Integer idAsistente, String hora, String fecha, String razon, Boolean status) {
+    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Integer idPaciente, Integer idAsistente, String hora, Date fecha, String razon, Boolean status) {
         this.idCita = idCita;
         this.tipoCita = tipoCita;
         this.horario = horario;
@@ -98,11 +100,11 @@ public class Cita {
         this.hora = hora;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
