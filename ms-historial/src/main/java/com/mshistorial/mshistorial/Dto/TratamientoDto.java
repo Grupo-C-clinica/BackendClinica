@@ -1,14 +1,14 @@
 package com.mshistorial.mshistorial.Dto;
 
-public class TratamiendoDto {
+public class TratamientoDto {
     private Integer idTratamiento;
     private Integer idHistorial;
     private String contenido;
     private Boolean status;
 
-    public TratamiendoDto() {
+    public TratamientoDto() {
     }
-    public TratamiendoDto(Integer idTratamiento, Integer idHistorial, String contenido, Boolean status) {
+    public TratamientoDto(Integer idTratamiento, Integer idHistorial, String contenido, Boolean status) {
         this.idTratamiento = idTratamiento;
         this.idHistorial = idHistorial;
         this.contenido = contenido;
