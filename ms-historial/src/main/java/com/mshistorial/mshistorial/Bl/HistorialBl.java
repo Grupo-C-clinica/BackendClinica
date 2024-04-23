@@ -50,7 +50,7 @@ public class HistorialBl {
     public HistorialDto obtnerHistorialById(Integer idHistorial){
         Historial historial = historialRepository.obtenerHistorialById(idHistorial);
         if (historial == null){
-            throw new IllegalArgumentException("El historial con ID "+ idHistorial + "no existe");
+            throw new IllegalArgumentException("El historial con no existe");
         }
         return new HistorialDto(
                 historial.getIdHistorial(),

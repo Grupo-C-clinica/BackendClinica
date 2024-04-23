@@ -39,4 +39,17 @@ public class TratamientoBl {
     }
 
     //MOSTRAR TRATAMIENTO POR HISTORIA
+
+    public TratamientoDto obtenerTratamientoById(Integer idTratamiento){
+        Tratamiento tratamiento = tratamientoRepository.obtenerTratamientoById(idTratamiento);
+        if (tratamiento == null){
+            throw new IllegalArgumentException("El tratamiento no existe");
+        }
+        return new TratamientoDto(
+                tratamiento.getIdTratamiento(),
+                tratamiento.getHistorial().getIdHistorial(),
+                tratamiento.getContenido(),
+                tratamiento.getStatus()
+        );
+    }
 }

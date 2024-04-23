@@ -10,4 +10,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Intege
     //Obtener tratamientos por historiales
     @Query("SELECT t FROM Tratamiento t WHERE t.historial.idHistorial =?1")
     public List<Tratamiento> obtenerTratamientoPorIdHistorial(Integer idHistorial);
+
+    //Obtener Tratamiento por Id
+    @Query("SELECT t FROM Tratamiento t WHERE t.idTratamiento=?1")
+    public Tratamiento obtenerTratamientoById(Integer idTratamiento);
 }
