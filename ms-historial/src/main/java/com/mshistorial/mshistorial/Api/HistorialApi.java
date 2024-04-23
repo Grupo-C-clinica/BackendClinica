@@ -12,13 +12,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/historial")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class HistorialApi {
     @Autowired
     private HistorialBl hsitorialBl;
 
     //Mostrar historiales de un paciente
-    @GetMapping(path = "/{idPaciente}")
+    @GetMapping(path = "/paciente/{idPaciente}")
     public ResponseEntity<ResponseDto<List<HistorialDto>>> findHistorialByPaciente(@PathVariable Integer idPaciente){
         List<HistorialDto> historiales = hsitorialBl.listaHistorialByPaciente(idPaciente);
         try{
