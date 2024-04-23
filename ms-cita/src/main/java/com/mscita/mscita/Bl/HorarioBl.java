@@ -31,5 +31,17 @@ public class HorarioBl {
         return horarioDto;
     }
 
+    //Crear un horario de un doctor
+    public void createHorario(HorarioDto horarioDto, Integer doctorId){
+        Horario horario = new Horario();
+        horario.setDoctorIdDoctor(doctorId);
+        horario.setDias(horarioDto.getDia());
+        horario.setHoraInicio(horarioDto.getHoraInicio());
+        horario.setHoraFin(horarioDto.getHoraFin());
+        horario.setDisponibilidad(horarioDto.getDisponibilidad());
+        horario.setStatus(true);
+        horarioRepository.save(horario);
+    }
+
 
 }
