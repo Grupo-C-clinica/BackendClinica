@@ -31,6 +31,22 @@ public class HorarioBl {
         return horarioDto;
     }
 
+    //Mostrar todos los horarios de un doctor
+    public List<HorarioDto> findAllHorariosByDoctorId(Integer doctorId){
+        List<Horario> horario = horarioRepository.findAllHorariosByDoctorId(doctorId);
+        List<HorarioDto> horarioDto = new ArrayList<>();
+        for (Horario horarios : horario){
+            HorarioDto horarioDtos = new HorarioDto();
+            horarioDtos.setIdHorario(horarios.getIdHorario());
+            horarioDtos.setHoraInicio(horarios.getHoraInicio());
+            horarioDtos.setHoraFin(horarios.getHoraFin());
+            horarioDtos.setDisponibilidad(horarios.getDisponibilidad());
+            horarioDtos.setStatus(horarios.getStatus());
+            horarioDto.add(horarioDtos);
+        }
+        return horarioDto;
+    }
+
     //Crear un horario de un doctor
     public void createHorario(HorarioDto horarioDto, Integer doctorId){
         Horario horario = new Horario();

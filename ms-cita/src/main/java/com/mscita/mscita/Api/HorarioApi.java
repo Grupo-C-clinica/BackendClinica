@@ -29,6 +29,18 @@ public class HorarioApi {
 
     }
 
+    //Mostrar todos los horarios de un doctor
+    @GetMapping("/all/doctor/{doctorId}")
+    public ResponseEntity<ResponseDto<List<HorarioDto>>> findAllHorariosByDoctorId(@PathVariable Integer doctorId){
+        List<HorarioDto> horarioDtos = horarioBl.findAllHorariosByDoctorId(doctorId);
+        try {
+            return ResponseEntity.ok(new ResponseDto<>(200, horarioDtos, "Success"));
+        } catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
+        }
+    }
+
+
     //Crear un horario de un doctor
     @PostMapping("/create/{doctorId}")
     public ResponseEntity<ResponseDto<String>> createHorario(@RequestBody HorarioDto horarioDto, @PathVariable Integer doctorId){
