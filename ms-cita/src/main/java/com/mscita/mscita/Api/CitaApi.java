@@ -7,19 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/cita")
-@CrossOrigin(origins = "*", methods= {org.springframework.web.bind.annotation.RequestMethod.GET, org.springframework.web.bind.annotation.RequestMethod.POST, org.springframework.web.bind.annotation.RequestMethod.PUT, org.springframework.web.bind.annotation.RequestMethod.DELETE})
+//@CrossOrigin(origins = "*", methods= {org.springframework.web.bind.annotation.RequestMethod.GET, org.springframework.web.bind.annotation.RequestMethod.POST, org.springframework.web.bind.annotation.RequestMethod.PUT, org.springframework.web.bind.annotation.RequestMethod.DELETE})
 public class CitaApi {
 
     @Autowired
     private CitaBl citaBl;
 
     //Crear cita para un paciente
-    @PostMapping("/create/{pacienteId}")
+    @PostMapping(path = "/create/{pacienteId}")
     public ResponseEntity<ResponseDto<CitaDto>> createCita(@PathVariable Integer pacienteId, @RequestBody CitaDto citaDto){
         citaBl.createCita(citaDto, pacienteId);
         try {
@@ -30,7 +32,7 @@ public class CitaApi {
     }
 
     //Ver todas las citas del paciente por su fecha
-    @GetMapping("/all/{pacienteId}/{fechaCita}")
+    @GetMapping(path = "/all/{pacienteId}/{fechaCita}")
     public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByPatientIdAndDate(@PathVariable Integer pacienteId, @PathVariable Date fechaCita){
         List<CitaDto> citaDtos = citaBl.findAllByPatientIdAndDate(pacienteId, fechaCita);
         try {
@@ -40,7 +42,7 @@ public class CitaApi {
         }
     }
 
-    @GetMapping("/allDates/{fechaInicio}/{fechaFinal}")
+    @GetMapping(path = "/allDates/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDateRange (@PathVariable Date fechaInicio, @PathVariable Date fechaFinal){
         List<CitaDto> citasDto = citaBl.findAllByDateRange(fechaInicio, fechaFinal);
         try {
@@ -51,11 +53,16 @@ public class CitaApi {
     }
 
     @GetMapping("/all/{fecha}")
-    public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDate(@PathVariable Date fecha){
-        List<CitaDto> citaDto = citaBl.findAllByDate(fecha);
+    public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDate(@PathVariable String fecha) {
         try {
-            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Succes"));
-        }catch (Exception e){
+            // Convertir el String a Date
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaDate = formatter.parse(fecha);
+
+            List<CitaDto> citaDto = citaBl.findAllByDate(fechaDate);
+            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Success"));
+        } catch (ParseException e) {
+            e.printStackTrace();
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
         }
     }

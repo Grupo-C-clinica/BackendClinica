@@ -23,7 +23,7 @@ public class Horario {
     @Column(name = "HORA_INICIO", nullable = false)
     private String horaInicio;
 
-    @Column(name = "HORA_FIN", nullable = false)
+    @Column(name = "HORA_FINAL", nullable = false)
     private String horaFin;
 
     @Column(name = "DISPONIBILIDAD", nullable = false)
