@@ -1,5 +1,6 @@
 package com.mshistorial.mshistorial.Api;
 
+import com.mshistorial.mshistorial.Bl.MultimediaBl;
 import com.mshistorial.mshistorial.Dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
