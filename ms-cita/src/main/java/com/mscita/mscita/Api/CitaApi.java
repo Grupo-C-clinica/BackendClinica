@@ -40,5 +40,23 @@ public class CitaApi {
         }
     }
 
+    @GetMapping("/allDates")
+    public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDateRange (@PathVariable Date fechaInicio, @PathVariable Date fechaFinal){
+        List<CitaDto> citasDto = citaBl.findAllByDateRange(fechaInicio, fechaFinal);
+        try {
+            return ResponseEntity.ok(new ResponseDto<>(200, citasDto, "Succes"));
+        }catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
+        }
+    }
 
+    @GetMapping("/all")
+    public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDate(@PathVariable Date fecha){
+        List<CitaDto> citaDto = citaBl.findAllByDate(fecha);
+        try {
+            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Succes"));
+        }catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
+        }
+    }
 }

@@ -56,7 +56,41 @@ public class CitaBl {
         return citaDto;
     }
 
-    
+    public List<CitaDto> findAllByDateRange (Date fechaInicio, Date fechaFin){
+        List<Cita> cita = citaRepository.findAllBetweenDates(fechaInicio, fechaFin);
+        List<CitaDto> citaDto = new ArrayList<>();
+        for (Cita citas: cita){
+            CitaDto citaDtos = new CitaDto();
+            citaDtos.setIdCita(citas.getIdCita());
+            citaDtos.setIdTipoCita(citas.getTipoCita().getIdTipoCita());
+            citaDtos.setIdHorario(citas.getHorario().getIdHorario());
+            citaDtos.setIdPaciente(citas.getIdPaciente());
+            citaDtos.setIdAsistente(citas.getIdAsistente());
+            citaDtos.setFecha(citas.getFecha());
+            citaDtos.setHora(citas.getHora());
+            citaDtos.setRazon(citas.getRazon());
+            citaDtos.setEstado(citas.getStatus());
+            citaDto.add(citaDtos);
+        }
+        return citaDto;
+    }
 
-
+    public List<CitaDto> findAllByDate (Date fecha){
+        List<Cita> cita = citaRepository.findAllCitasByFecha(fecha);
+        List<CitaDto> citaDto = new ArrayList<>();
+        for(Cita citas: cita){
+            CitaDto citaDtos = new CitaDto();
+            citaDtos.setIdCita(citas.getIdCita());
+            citaDtos.setIdTipoCita(citas.getTipoCita().getIdTipoCita());
+            citaDtos.setIdHorario(citas.getHorario().getIdHorario());
+            citaDtos.setIdPaciente(citas.getIdPaciente());
+            citaDtos.setIdAsistente(citas.getIdAsistente());
+            citaDtos.setFecha(citas.getFecha());
+            citaDtos.setHora(citas.getHora());
+            citaDtos.setRazon(citas.getRazon());
+            citaDtos.setEstado(citas.getStatus());
+            citaDto.add(citaDtos);
+        }
+        return citaDto;
+    }
 }
