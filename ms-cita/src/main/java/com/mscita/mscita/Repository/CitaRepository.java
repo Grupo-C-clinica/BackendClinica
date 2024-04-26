@@ -11,7 +11,7 @@ public interface CitaRepository extends JpaRepository<Cita, Integer> {
 
     //Ver todas las citas de un paciente por fecha
     @Query("SELECT c FROM Cita c WHERE c.idPaciente= ?1 And c.fecha= ?2")
-    public List<Cita> findAllByPatientId(Integer patientId);
+    public List<Cita> findAllByPatientId(Integer patientId, Date fechaCita);
 
     //Ver todas las citas de un doctor por fecha
     @Query("SELECT c FROM Cita c WHERE c.horario.doctorIdDoctor= ?1 And c.fecha= ?2")
@@ -32,4 +32,6 @@ public interface CitaRepository extends JpaRepository<Cita, Integer> {
     //Ver todas las citas de un paciente entre dos fechas
     @Query("SELECT c FROM Cita c WHERE c.idPaciente= ?1 And c.fecha BETWEEN ?2 AND ?3")
     public List<Cita> findAllByPatientIdBetweenDates(Integer patientId, Date fechaInicio, Date fechaFin);
+
+
 }

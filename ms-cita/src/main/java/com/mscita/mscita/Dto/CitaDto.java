@@ -9,14 +9,14 @@ public class CitaDto {
     private Integer idPaciente;
     private Integer idAsistente;
     private String hora;
-    private String fecha;
+    private Date fecha;
     private String razon;
     private Boolean estado;
 
     public CitaDto() {
     }
 
-    public CitaDto(Integer idCita, Integer idTipoCita, Integer idHorario, Integer idPaciente, Integer idAsistente, String hora, String fecha, String razon, Boolean estado) {
+    public CitaDto(Integer idCita, Integer idTipoCita, Integer idHorario, Integer idPaciente, Integer idAsistente, String hora, Date fecha, String razon, Boolean estado) {
         this.idCita = idCita;
         this.idTipoCita = idTipoCita;
         this.idHorario = idHorario;
@@ -76,11 +76,11 @@ public class CitaDto {
         this.hora = hora;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
