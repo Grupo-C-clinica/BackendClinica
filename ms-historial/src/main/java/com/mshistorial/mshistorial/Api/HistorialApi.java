@@ -35,10 +35,12 @@ public class HistorialApi {
     // Crear historial por paciente
     @PostMapping(path = "/agregar/{idPaciente}")
     public ResponseEntity<ResponseDto<String>> crearHistorialByPaciente (@PathVariable Integer idPaciente, @RequestBody HistorialDto historialDto){
+        System.out.println("API received historialDto: " + historialDto); // Añadir para ver qué recibes exactamente
+
         try {
             hsitorialBl.addHistorialByPaciente(historialDto, idPaciente);
             return ResponseEntity.ok(new ResponseDto<>(200, "Historial creado con exito", null));
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al crear el historial"));
         }
