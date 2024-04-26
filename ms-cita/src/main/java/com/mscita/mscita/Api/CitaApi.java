@@ -40,7 +40,7 @@ public class CitaApi {
         }
     }
 
-    @GetMapping("/allDates")
+    @GetMapping("/allDates/{fechaInicio}/{fechaFinal}")
     public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDateRange (@PathVariable Date fechaInicio, @PathVariable Date fechaFinal){
         List<CitaDto> citasDto = citaBl.findAllByDateRange(fechaInicio, fechaFinal);
         try {
@@ -50,7 +50,7 @@ public class CitaApi {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/{fecha}")
     public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDate(@PathVariable Date fecha){
         List<CitaDto> citaDto = citaBl.findAllByDate(fecha);
         try {
