@@ -20,4 +20,15 @@ public class PersonaBl {
         return pagePersonas.map(persona -> new PersonaDto(persona.getIdPersona(), persona.getNombre(), persona.getApellidoP(),persona.getApellidoM(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(), persona.getCi(), persona.getStatus()));
     }
 
+    //Mostrar todos los pacientes ordenados por nombre de forma asecendente o descendente
+    public Page<PersonaDto> findAllPacientesOrderByNombreAscOrDesc(Pageable pageable, Integer status){
+        Page <Persona> pagePersonas;
+        if (status == 1)
+            pagePersonas = personaRepository.findAllPacientesOrderByNombreAsc(pageable);
+        else
+            pagePersonas = personaRepository.findAllPacientesOrderByNombreDesc(pageable);
+        return pagePersonas.map(persona -> new PersonaDto(persona.getIdPersona(), persona.getNombre(), persona.getApellidoP(),persona.getApellidoM(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(), persona.getCi(), persona.getStatus()));
+    }
+
+
 }
