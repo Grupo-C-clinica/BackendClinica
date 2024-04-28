@@ -123,9 +123,26 @@ public class PacienteApi {
         }
     }
 
+    //Mostrar los pacientes por orden ascendente o descendente
+    @GetMapping(path = "/ordenar/{orden}")
+    public ResponseEntity<ResponseDto<Page<PersonaDto>>> findPacientesOrderByNombre(@PathVariable Integer orden, @PageableDefault(size = 10) Pageable pageable) {
+        try {
+            Page<PersonaDto> pacientes = personaBl.findAllPacientesOrderByNombreAscOrDesc(pageable, orden);
+            if (!pacientes.isEmpty()) {
+                return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
+            } else {
+                return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+        }
+    }
 
 
-    
+
+
+
 
 
 }
