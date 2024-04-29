@@ -20,10 +20,9 @@ public class TratamientoBl {
         Historial historial = new Historial();
         historial.setIdHistorial(idHistorial);
         Tratamiento tratamiento = new Tratamiento();
-        tratamiento.setHistorial(historial);
         tratamiento.setContenido(tratamiendoDto.getContenido());
-        tratamiento.setStatus(tratamiento.getStatus());
-
+        tratamiento.setStatus(true);
+        tratamiento.setHistorial(historial);
         tratamientoRepository.save(tratamiento);
     }
 
