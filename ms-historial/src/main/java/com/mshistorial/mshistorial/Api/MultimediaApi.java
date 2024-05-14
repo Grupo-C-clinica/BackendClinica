@@ -1,6 +1,7 @@
 package com.mshistorial.mshistorial.Api;
 
 import com.mshistorial.mshistorial.Bl.MultimediaBl;
+import com.mshistorial.mshistorial.Dto.MultimediaDto;
 import com.mshistorial.mshistorial.Dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,17 @@ public class MultimediaApi {
         multimediaBl.createMultimedia(historialId, multimediaDtos);
         try {
             return ResponseEntity.ok(new ResponseDto<>(200, "Multimedia creado correctamente", "Success"));
+        } catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
+        }
+    }
+
+    // Mostrar todas las imagenes de un historial
+    @GetMapping("/all/{historialId}")
+    public ResponseEntity<ResponseDto<List<MultimediaDto>>> findAllByHistorialId(@PathVariable Integer historialId){
+        List<MultimediaDto> multimedia = multimediaBl.findAllByHistorialId(historialId);
+        try {
+            return ResponseEntity.ok(new ResponseDto<>(200, multimedia, "Success"));
         } catch (Exception e){
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
         }
