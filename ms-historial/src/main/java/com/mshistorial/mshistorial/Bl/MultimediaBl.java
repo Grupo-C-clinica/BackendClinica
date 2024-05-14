@@ -22,6 +22,7 @@ public class MultimediaBl {
             historial.setIdHistorial(historialId);
             multimediaEntity.setHistorial(historial);
             multimediaEntity.setMultimedia(multimediaDto);
+            multimediaEntity.setStatus(true);
             multimediaRepository.save(multimediaEntity);
         }
     }

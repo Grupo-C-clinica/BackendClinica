@@ -15,7 +15,7 @@ public class Multimedia implements Serializable {
     private Integer idMultimedia;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "HISTORIAL_CLINICA_ID", nullable = false)
+    @JoinColumn(name = "HISTORIAL_CLINICO_ID", nullable = false)
     private Historial historial;
 
     @Column(name = "MULTIMEDIA")
