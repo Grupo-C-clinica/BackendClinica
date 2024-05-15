@@ -112,7 +112,6 @@ public class CitaBl {
                 horario.setIdHorario(citaDto.getIdHorario());
                 cita.setHorario(horario);
             }
-            cita.setIdPaciente(citaDto.getIdPaciente());
             cita.setIdAsistente(citaDto.getIdAsistente());
             cita.setFecha(citaDto.getFecha());
             cita.setHora(citaDto.getHora());
@@ -121,6 +120,17 @@ public class CitaBl {
             citaRepository.save(cita);
         }else{
             throw new RuntimeException("La cita con ID "+ citaId + "no existe");
+        }
+    }
+    // Boorado logico por cita
+    public void borrarCita(Integer citaId){
+        Optional<Cita> optionalCita = citaRepository.findById(citaId);
+        if (optionalCita.isPresent()) {
+            Cita cita = optionalCita.get();
+            cita.setStatus(false);
+            citaRepository.save(cita);
+        }else{
+            throw new RuntimeException("La cita con ID "+ citaId +" no existe");
         }
     }
 }
