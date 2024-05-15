@@ -66,4 +66,14 @@ public class CitaApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
         }
     }
+    //Modificar la cita dependiendo su ID
+    @PutMapping("/modificar/{citaId}")
+    public ResponseEntity<ResponseDto<CitaDto>> modificarCita(@PathVariable Integer citaId, @RequestBody CitaDto citaDto){
+        try{
+            citaBl.modificarCita(citaId, citaDto);
+            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "La cita se modifico correctamente"));
+        }catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al modificar la cita"));
+        }
+    }
 }

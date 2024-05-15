@@ -2,6 +2,7 @@ package com.mscita.mscita.Entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class Cita {
     @Column(name = "ID_ASISTENTE", nullable = false)
     private Integer idAsistente;
     @Column(name = "HORA", nullable = false)
-    private String hora;
+    private Time hora;
 
     @Column(name = "FECHA", nullable = false)
     private Date fecha;
@@ -40,7 +41,7 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Integer idPaciente, Integer idAsistente, String hora, Date fecha, String razon, Boolean status) {
+    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Integer idPaciente, Integer idAsistente, Time hora, Date fecha, String razon, Boolean status) {
         this.idCita = idCita;
         this.tipoCita = tipoCita;
         this.horario = horario;
@@ -92,11 +93,11 @@ public class Cita {
         this.idAsistente = idAsistente;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -132,8 +133,8 @@ public class Cita {
                 ", horario=" + horario +
                 ", idPaciente=" + idPaciente +
                 ", idAsistente=" + idAsistente +
-                ", hora='" + hora + '\'' +
-                ", fecha='" + fecha + '\'' +
+                ", hora=" + hora +
+                ", fecha=" + fecha +
                 ", razon='" + razon + '\'' +
                 ", status=" + status +
                 '}';

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CitaBl {
@@ -92,5 +93,34 @@ public class CitaBl {
             citaDto.add(citaDtos);
         }
         return citaDto;
+    }
+
+    // Modificar la cita
+
+
+    public void modificarCita(Integer citaId, CitaDto citaDto){
+        Optional<Cita> optionalCita = citaRepository.findById(citaId);
+        if(optionalCita.isPresent()){
+            Cita cita = optionalCita.get();
+            if (citaDto.getIdTipoCita() != null) {
+                TipoCita tipoCita = new TipoCita();
+                tipoCita.setIdTipoCita(citaDto.getIdTipoCita());
+                cita.setTipoCita(tipoCita);
+            }
+            if (citaDto.getIdHorario() != null) {
+                Horario horario = new Horario();
+                horario.setIdHorario(citaDto.getIdHorario());
+                cita.setHorario(horario);
+            }
+            cita.setIdPaciente(citaDto.getIdPaciente());
+            cita.setIdAsistente(citaDto.getIdAsistente());
+            cita.setFecha(citaDto.getFecha());
+            cita.setHora(citaDto.getHora());
+            cita.setRazon(citaDto.getRazon());
+            cita.setStatus(citaDto.getEstado());
+            citaRepository.save(cita);
+        }else{
+            throw new RuntimeException("La cita con ID "+ citaId + "no existe");
+        }
     }
 }

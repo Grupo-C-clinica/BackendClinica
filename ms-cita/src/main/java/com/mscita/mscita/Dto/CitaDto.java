@@ -1,5 +1,6 @@
 package com.mscita.mscita.Dto;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class CitaDto {
@@ -8,7 +9,7 @@ public class CitaDto {
     private Integer idHorario;
     private Integer idPaciente;
     private Integer idAsistente;
-    private String hora;
+    private Time hora;
     private Date fecha;
     private String razon;
     private Boolean estado;
@@ -16,7 +17,7 @@ public class CitaDto {
     public CitaDto() {
     }
 
-    public CitaDto(Integer idCita, Integer idTipoCita, Integer idHorario, Integer idPaciente, Integer idAsistente, String hora, Date fecha, String razon, Boolean estado) {
+    public CitaDto(Integer idCita, Integer idTipoCita, Integer idHorario, Integer idPaciente, Integer idAsistente, Time hora, Date fecha, String razon, Boolean estado) {
         this.idCita = idCita;
         this.idTipoCita = idTipoCita;
         this.idHorario = idHorario;
@@ -68,11 +69,11 @@ public class CitaDto {
         this.idAsistente = idAsistente;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -108,7 +109,7 @@ public class CitaDto {
                 ", idHorario=" + idHorario +
                 ", idPaciente=" + idPaciente +
                 ", idAsistente=" + idAsistente +
-                ", hora='" + hora + '\'' +
+                ", hora=" + hora +
                 ", fecha=" + fecha +
                 ", razon='" + razon + '\'' +
                 ", estado=" + estado +
