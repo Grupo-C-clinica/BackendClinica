@@ -4,6 +4,7 @@ import com.mshistorial.mshistorial.Dao.MultimediaRepository;
 import com.mshistorial.mshistorial.Dto.MultimediaDto;
 import com.mshistorial.mshistorial.Entity.Historial;
 import com.mshistorial.mshistorial.Entity.Multimedia;
+import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.StatObjectArgs;
 import io.minio.errors.MinioException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class MultimediaBl {
     @Autowired
     private MinioBl minioService;
 
-    String bucketName = "software";
+    private String bucketName = "software";
 
     //Crear multimeda de un hostorial
     public void createMultimedia(Integer historialId, List<MultipartFile> multimedia){
@@ -45,7 +47,7 @@ public class MultimediaBl {
                 minioClient.putObject(
                         io.minio.PutObjectArgs.builder()
                                 .bucket(bucketName)
-                                .object(multimediaName) // Cambio aquí: usa solo el nombre del archivo original
+                                .object(multimediaName.trim()) // Cambio aquí: usa solo el nombre del archivo original
                                 .stream(multimediaDto.getInputStream(), multimediaDto.getSize(), -1)
                                 .build()
                 );
@@ -63,31 +65,58 @@ public class MultimediaBl {
     }
 
     //Mostrar multimedia de un historial
-    public List<MultipartFile> findAllByHistorialId(Integer historialId) {
+    public List<MultipartFileDto> findAllByHistorialId(Integer historialId) {
         List<Multimedia> multimediaList = multimediaRepository.findAllByHistorialId(historialId);
-        List<MultipartFile> multipartFiles = new ArrayList<>();
+        if (multimediaList.isEmpty()) {
+            System.err.println("No se encontraron archivos multimedia para el historialId: " + historialId);
+        }
+        List<MultipartFileDto> multipartFiles = new ArrayList<>();
         for (Multimedia multimediaEntity : multimediaList) {
             try {
+                String objectName = multimediaEntity.getMultimedia().trim(); // Eliminar espacios en blanco
+                System.out.println("Procesando archivo: " + objectName);
+
                 // Verificar si el archivo existe en MinIO
                 StatObjectArgs statObjectArgs = StatObjectArgs.builder()
                         .bucket(bucketName)
-                        .object(multimediaEntity.getMultimedia())
+                        .object(objectName)
                         .build();
                 minioClient.statObject(statObjectArgs);
+                System.out.println("Archivo encontrado en MinIO: " + objectName);
 
-                // Si no se lanza una excepción, el archivo existe
-                // Obtener el archivo desde MinIO y añadirlo a la lista
-                MultipartFile file = minioService.getFile(bucketName, multimediaEntity.getMultimedia());
-                multipartFiles.add(file);
-            } catch (MinioException | IOException | IllegalArgumentException e) {
-                // La excepción IllegalArgumentException se lanza si el objeto no existe
-                // Puedes manejarla aquí o simplemente omitir este archivo y continuar con los demás
-                continue; // Omitir este archivo y continuar con el siguiente
+                // Obtener el archivo desde MinIO
+                GetObjectArgs getObjectArgs = GetObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(objectName)
+                        .build();
+                InputStream inputStream = minioClient.getObject(getObjectArgs);
+
+                // Convertir InputStream a byte[]
+                byte[] bytes = inputStream.readAllBytes();
+                inputStream.close();
+                System.out.println("Archivo obtenido y convertido: " + objectName);
+
+                // Crear MultipartFileDto y añadirlo a la lista
+                MultipartFileDto fileDto = new MultipartFileDto(
+                        multimediaEntity.getMultimedia(), // Usamos el nombre del archivo como nombre en el DTO
+                        multimediaEntity.getMultimedia(), // Usamos el nombre del archivo original como originalFilename en el DTO
+                        "application/octet-stream", // Puedes ajustar el tipo de contenido según tus necesidades
+                        bytes.length, // Tamaño del archivo
+                        bytes // Bytes del archivo
+                );
+                multipartFiles.add(fileDto);
+            } catch (MinioException e) {
+                System.err.println("Error en MinIO al obtener el archivo: " + multimediaEntity.getMultimedia() + ", Error: " + e.getMessage());
+                continue;
+            } catch (IOException e) {
+                System.err.println("Error de IO al obtener el archivo: " + multimediaEntity.getMultimedia() + ", Error: " + e.getMessage());
+                continue;
             } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-                // Manejar otras excepciones aquí si es necesario
-                throw new RuntimeException(e);
+                System.err.println("Error de seguridad al obtener el archivo: " + multimediaEntity.getMultimedia() + ", Error: " + e.getMessage());
+                continue;
             }
         }
+        System.out.println("Total de archivos obtenidos: " + multipartFiles.size());
         return multipartFiles;
     }
 

@@ -1,5 +1,6 @@
 package com.mshistorial.mshistorial.Bl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -51,6 +52,7 @@ public class CustomMultipartFile implements MultipartFile {
     }
 
     @Override
+    @JsonIgnore // Ignorar el InputStream durante la serialización
     public InputStream getInputStream() throws IOException {
         return new ByteArrayInputStream(content);
     }
