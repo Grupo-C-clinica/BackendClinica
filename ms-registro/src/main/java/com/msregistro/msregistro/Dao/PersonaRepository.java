@@ -22,4 +22,9 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
     //
     @Query("SELECT p FROM Persona p WHERE p.idPersona IN (SELECT pa.persona.idPersona FROM Paciente pa) ORDER BY p.nombre DESC")
     Page<Persona> findAllPacientesOrderByNombreDesc(Pageable pageable);
+
+    @Query("SELECT new com.msregistro.msregistro.Dto.PacienteViewDto(" +
+            "p.idPersona, p.nombre, p.apellidoP, p.apellidoM, p.fechaNacimiento, p.genero) " +
+            "FROM Persona p WHERE p.idPersona IN (SELECT pa.persona.idPersona FROM Paciente pa)")
+    List<PacienteViewDto> findAllPaciente();
 }
