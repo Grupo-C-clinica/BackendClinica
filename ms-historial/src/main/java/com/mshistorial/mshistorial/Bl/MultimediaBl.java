@@ -98,6 +98,7 @@ public class MultimediaBl {
 
                 // Crear MultipartFileDto y añadirlo a la lista
                 MultipartFileDto fileDto = new MultipartFileDto(
+                        multimediaEntity.getIdMultimedia(),
                         multimediaEntity.getMultimedia(), // Usamos el nombre del archivo como nombre en el DTO
                         multimediaEntity.getMultimedia(), // Usamos el nombre del archivo original como originalFilename en el DTO
                         "application/octet-stream", // Puedes ajustar el tipo de contenido según tus necesidades
@@ -119,6 +120,8 @@ public class MultimediaBl {
         System.out.println("Total de archivos obtenidos: " + multipartFiles.size());
         return multipartFiles;
     }
+
+    //Eliminar multimedia de un historial
 
 
 }

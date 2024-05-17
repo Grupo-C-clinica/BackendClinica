@@ -1,6 +1,9 @@
 package com.mshistorial.mshistorial.Bl;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+
 public class MultipartFileDto {
+    private Integer idMultimedia;
     private String name;
     private String originalFilename;
     private String contentType;
@@ -8,12 +11,23 @@ public class MultipartFileDto {
     private byte[] bytes; // Agregamos un campo para los bytes del archivo
 
     // Constructores, getters y setters
-    public MultipartFileDto(String name, String originalFilename, String contentType, long size, byte[] bytes) {
+
+
+    public MultipartFileDto(Integer idMultimedia, String name, String originalFilename, String contentType, long size, byte[] bytes) {
+        this.idMultimedia = idMultimedia;
         this.name = name;
         this.originalFilename = originalFilename;
         this.contentType = contentType;
         this.size = size;
         this.bytes = bytes;
+    }
+
+    public Integer getIdMultimedia() {
+        return idMultimedia;
+    }
+
+    public void setIdMultimedia(Integer idMultimedia) {
+        this.idMultimedia = idMultimedia;
     }
 
     // Getters y setters
