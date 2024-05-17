@@ -13,5 +13,9 @@ public interface MultimediaRepository extends JpaRepository<Multimedia, Integer>
     @Query("SELECT m FROM Multimedia m WHERE m.historial.idHistorial= ?1")
     public List<Multimedia> findAllByHistorialId(Integer historialId);
 
+    //Buscar multimedia por su id
+    @Query("SELECT m FROM Multimedia m WHERE m.idMultimedia= ?1")
+    public Multimedia findByIdMultimedia(Integer idMultimedia);
+
 
 }
