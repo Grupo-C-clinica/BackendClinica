@@ -20,7 +20,7 @@ public class CitaBl {
     private CitaRepository citaRepository;
 
     //Crear cita par aun paciente
-    public void createCita(CitaDto citaDto, Integer idPaciente){
+    public void createCita(CitaDto citaDto, Integer idAsistente){
         TipoCita tipoCita = new TipoCita();
         Horario horario = new Horario();
         Cita cita = new Cita();
@@ -28,13 +28,14 @@ public class CitaBl {
         horario.setIdHorario(citaDto.getIdHorario());
         cita.setTipoCita(tipoCita);
         cita.setHorario(horario);
-        cita.setIdPaciente(idPaciente);
-        cita.setIdAsistente(citaDto.getIdAsistente());
+        cita.setIdPaciente(citaDto.getIdPaciente());
+        cita.setIdAsistente(idAsistente);
         cita.setFecha(citaDto.getFecha());
         cita.setHora(citaDto.getHora());
         cita.setRazon(citaDto.getRazon());
         cita.setStatus(true);
         citaRepository.save(cita);
+        System.out.println("Hora: " + citaDto.getHora());
     }
 
     //Ver todas las citas de un paciente por su fecha

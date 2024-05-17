@@ -21,9 +21,9 @@ public class CitaApi {
     private CitaBl citaBl;
 
     //Crear cita para un paciente
-    @PostMapping(path = "/create/{pacienteId}")
-    public ResponseEntity<ResponseDto<CitaDto>> createCita(@PathVariable Integer pacienteId, @RequestBody CitaDto citaDto){
-        citaBl.createCita(citaDto, pacienteId);
+    @PostMapping(path = "/create/{asistenteId}")
+    public ResponseEntity<ResponseDto<CitaDto>> createCita(@PathVariable Integer asistenteId, @RequestBody CitaDto citaDto){
+        citaBl.createCita(citaDto, asistenteId);
         try {
             return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Success"));
         } catch (Exception e){

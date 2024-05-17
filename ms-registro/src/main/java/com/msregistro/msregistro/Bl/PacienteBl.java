@@ -51,6 +51,8 @@ public class PacienteBl {
         }
     }
 
+
+
     //Obtener lista de pacientes por nombre
     public List<PacienteViewDto> findPacientesByName(String nombre) {
         System.out.println("Nombre: " + nombre);
