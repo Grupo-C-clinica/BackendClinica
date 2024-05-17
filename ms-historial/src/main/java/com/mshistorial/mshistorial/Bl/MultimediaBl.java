@@ -121,9 +121,9 @@ public class MultimediaBl {
         return multipartFiles;
     }
 
-    //Eliminar multimedia de un historial
+    //Eliminar multimedia por su id
     public void deleteMultimedia(Integer multimediaId){
-        Multimedia multimedia = multimediaRepository.findById(multimediaId).orElse(null);
+        Multimedia multimedia = multimediaRepository.findByIdMultimedia(multimediaId);
         if (multimedia == null) {
             System.err.println("No se encontró el archivo multimedia con el id: " + multimediaId);
             return;

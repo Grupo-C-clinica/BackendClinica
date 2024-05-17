@@ -43,4 +43,7 @@ public class MultimediaApi {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto<>(500, null, "Error"));
         }
     }
+
+    // Eliminar una imagen por su id
+
 }
