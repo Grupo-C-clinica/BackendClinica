@@ -96,6 +96,28 @@ public class CitaBl {
         return citaDto;
     }
 
+
+    public CitaDto findCitaById (Integer citaId){
+        Optional<Cita> optionalCita = citaRepository.findById(citaId);
+        if(optionalCita.isPresent()){
+            Cita cita = optionalCita.get();
+            CitaDto citaDto = new CitaDto();
+            citaDto.setIdCita(cita.getIdCita());
+            citaDto.setIdTipoCita(cita.getTipoCita().getIdTipoCita());
+            citaDto.setIdHorario(cita.getHorario().getIdHorario());
+            citaDto.setIdPaciente(cita.getIdPaciente());
+            citaDto.setIdAsistente(cita.getIdAsistente());
+            citaDto.setFecha(cita.getFecha());
+            citaDto.setHora(cita.getHora());
+            citaDto.setRazon(cita.getRazon());
+            citaDto.setEstado(cita.getStatus());
+            return citaDto;
+        } else {
+            throw new RuntimeException("La cita con ID " + citaId + " no existe");
+        }
+    }
+
+
     // Modificar la cita
 
 

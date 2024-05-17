@@ -77,13 +77,23 @@ public class CitaApi {
         }
     }
     //Borrado logico de cita
-    @PutMapping("eliminado/{citaId}")
+    @PutMapping("/eliminado/{citaId}")
     public ResponseEntity<ResponseDto<CitaDto>> eliminarCita(@PathVariable Integer citaId){
         try {
             citaBl.borrarCita(citaId);
             return ResponseEntity.ok(new ResponseDto<>(200, null, "La cita se borro correctamente"));
         }catch (Exception e){
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al borrar la cota"));
+        }
+    }
+
+    @GetMapping("/{citaId}")
+    public ResponseEntity<ResponseDto<CitaDto>> findCitaById(@PathVariable Integer citaId){
+        try{
+            CitaDto citaDto = citaBl.findCitaById(citaId);
+            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Success"));
+        }catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
         }
     }
 }
