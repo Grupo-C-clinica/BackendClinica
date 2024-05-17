@@ -45,5 +45,14 @@ public class MultimediaApi {
     }
 
     // Eliminar una imagen por su id
+    @DeleteMapping("/delete/{idMultimedia}")
+    public ResponseEntity<ResponseDto<String>> deleteByIdMultimedia(@PathVariable Integer idMultimedia) {
+        try {
+            multimediaBl.deleteMultimedia(idMultimedia);
+            return ResponseEntity.ok(new ResponseDto<>(200, "Multimedia eliminado correctamente", "Success"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto<>(500, null, "Error"));
+        }
+    }
 
 }
