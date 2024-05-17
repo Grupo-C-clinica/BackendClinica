@@ -11,8 +11,6 @@ public class MultipartFileDto {
     private byte[] bytes; // Agregamos un campo para los bytes del archivo
 
     // Constructores, getters y setters
-
-
     public MultipartFileDto(Integer idMultimedia, String name, String originalFilename, String contentType, long size, byte[] bytes) {
         this.idMultimedia = idMultimedia;
         this.name = name;

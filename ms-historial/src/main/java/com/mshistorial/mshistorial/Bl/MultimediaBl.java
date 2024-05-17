@@ -122,6 +122,43 @@ public class MultimediaBl {
     }
 
     //Eliminar multimedia de un historial
+    public void deleteMultimedia(Integer multimediaId){
+        Multimedia multimedia = multimediaRepository.findById(multimediaId).orElse(null);
+        if (multimedia == null) {
+            System.err.println("No se encontró el archivo multimedia con el id: " + multimediaId);
+            return;
+        }
+        try {
+            String objectName = multimedia.getMultimedia().trim(); // Eliminar espacios en blanco
+            System.out.println("Procesando archivo: " + objectName);
 
+            // Verificar si el archivo existe en MinIO
+            StatObjectArgs statObjectArgs = StatObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    .build();
+            minioClient.statObject(statObjectArgs);
+            System.out.println("Archivo encontrado en MinIO: " + objectName);
+
+            // Eliminar el archivo de MinIO
+            minioClient.removeObject(
+                    io.minio.RemoveObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .build()
+            );
+            System.out.println("Archivo eliminado de MinIO: " + objectName);
+
+            // Eliminar el archivo de la base de datos
+            multimediaRepository.delete(multimedia);
+            System.out.println("Archivo eliminado de la base de datos: " + multimediaId);
+        } catch (MinioException e) {
+            System.err.println("Error en MinIO al eliminar el archivo: " + multimedia.getMultimedia() + ", Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error de IO al eliminar el archivo: " + multimedia.getMultimedia() + ", Error: " + e.getMessage());
+        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+            System.err.println("Error de seguridad al eliminar el archivo: " + multimedia.getMultimedia() + ", Error: " + e.getMessage());
+        }
+    }
 
 }
